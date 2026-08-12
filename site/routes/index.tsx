@@ -64,18 +64,27 @@ const [panels, setPanels] = useState<MyPanel[]>([
 						</p>
 						<div className="gestures">
 							<figure className="gesture">
-								<figcaption>Resize: drag a shared edge. Every panel touching that line moves w/ it.</figcaption>
+								<figcaption>
+									<span className="gesture-name">Resize</span>
+									<p>Drag a shared edge. Every panel touching that line moves w/ it.</p>
+								</figcaption>
 								<img src={resizeDiagram} alt="Dragging a shared edge to a new position" />
 							</figure>
 							<figure className="gesture">
 								<figcaption>
-									Split: drag a corner inward. It divides where you release. Sideways gives you a
-									seam down the middle, up or down gives you one across.
+									<span className="gesture-name">Split</span>
+									<p>
+										Drag a corner inward. It divides where you release. Sideways gives you a seam
+										down the middle, up or down gives you one across.
+									</p>
 								</figcaption>
 								<img src={splitDiagram} alt="Dragging a corner inward to divide a panel in two" />
 							</figure>
 							<figure className="gesture">
-								<figcaption>Join: drag a corner across into a neighbour. Your panel takes its space.</figcaption>
+								<figcaption>
+									<span className="gesture-name">Join</span>
+									<p>Drag a corner across into a neighbour. Your panel takes its space.</p>
+								</figcaption>
 								<img src={joinDiagram} alt="Dragging a corner across into a neighbour to swallow it" />
 							</figure>
 						</div>

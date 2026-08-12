@@ -193,37 +193,59 @@ body {
 	font-size: 14px;
 }
 
-/* Each gesture is its own block, and they alternate side to side down the section. */
+/* A gesture sets its words beside its picture, and the two swap sides as you read down. */
 .gestures {
 	display: grid;
-	grid-template-columns: repeat(5, minmax(0, 1fr));
-	column-gap: var(--space-30);
 	row-gap: var(--space-60);
 }
 
 .gesture {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	column-gap: var(--space-30);
+	align-items: start;
 	margin: 0;
-	grid-column: 1 / 5;
 }
 
-.gesture:nth-child(even) {
-	grid-column: 2 / -1;
+.gesture figcaption {
+	grid-column: 1 / 3;
 }
 
 .gesture img {
 	display: block;
 	width: 100%;
 	height: auto;
-	margin-top: var(--space-10);
+	grid-column: 3 / -1;
+}
+
+.gesture:nth-child(even) figcaption {
+	grid-column: 4 / -1;
+}
+
+.gesture:nth-child(even) img {
+	grid-column: 1 / 4;
+}
+
+.gesture-name {
+	display: block;
+	margin-bottom: var(--space-10);
+}
+
+.gesture p {
+	margin: 0;
 }
 
 @media (max-width: 720px) {
-	.gestures {
-		grid-template-columns: minmax(0, 1fr);
-	}
-
 	.gesture,
 	.gesture:nth-child(even) {
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: var(--space-10);
+	}
+
+	.gesture figcaption,
+	.gesture img,
+	.gesture:nth-child(even) figcaption,
+	.gesture:nth-child(even) img {
 		grid-column: 1 / -1;
 	}
 }
