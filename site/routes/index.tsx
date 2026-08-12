@@ -14,6 +14,30 @@ function Page() {
 		<main className="page">
 			<article className="docs">
 				<section>
+					<h2>Demo</h2>
+					<div className="body">
+						<p>
+							Drag an edge to resize, a corner inward to split, a corner across to join. It is styled
+							entirely by the page, since the library never dresses what you put in a panel.
+						</p>
+						<Code lang="tsx">{`const style = {
+  '--rbp-gap': '4px',
+  '--rbp-edge-color': 'transparent',   // the handles vanish
+  '--rbp-corner-color': 'transparent', // every gesture still works
+  '--rbp-preview-border': '#1d1d1f',
+  '--rbp-preview-radius': '4px',
+}
+
+<Panels value={panels} onChange={setPanels} style={style}>
+  {(panel) => <div className="demo-panel">{panel.id}</div>}
+</Panels>`}</Code>
+						<Demo />
+					</div>
+				</section>
+
+				<hr className="divider" />
+
+				<section>
 					<h2>Getting started</h2>
 					<div className="body">
 						<p>
@@ -149,31 +173,6 @@ const [panels, setPanels] = useState<MyPanel[]>([
 </Panels>`}</Code>
 					</div>
 				</section>
-
-				<hr className="divider" />
-
-				<section>
-					<h2>Demo</h2>
-					<div className="body">
-						<p>
-							Drag an edge to resize, a corner inward to split, a corner across to join. It is styled
-							entirely by the page, since the library never dresses what you put in a panel.
-						</p>
-						<Code lang="tsx">{`const style = {
-  '--rbp-gap': '4px',
-  '--rbp-edge-color': 'transparent',   // the handles vanish
-  '--rbp-corner-color': 'transparent', // every gesture still works
-  '--rbp-preview-border': '#1d1d1f',
-  '--rbp-preview-radius': '4px',
-}
-
-<Panels value={panels} onChange={setPanels} style={style}>
-  {(panel) => <div className="demo-panel">{panel.id}</div>}
-</Panels>`}</Code>
-						<Demo />
-					</div>
-				</section>
-
 		</article>
 		</main>
 	)
