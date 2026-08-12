@@ -5,6 +5,8 @@ dragging an edge, and split or join by dragging a corner.
 
 **[Docs and demo](https://reactblenderpanels.com)**
 
+![Three panels tiling a div, each one a rectangle in fractions of it](diagrams/panels.png)
+
 ```
 npm install react-blender-panels
 ```
