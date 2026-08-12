@@ -7,7 +7,6 @@
 	--color-surface: #ffffff;
 	--color-text: #1d1d1f;
 	--color-divider: rgba(29, 29, 31, 0.45);
-	--color-rule: rgba(29, 29, 31, 0.14);
 
 	--space-10: 10px;
 	--space-30: 30px;
@@ -159,12 +158,31 @@ body {
 	margin-bottom: 2lh;
 }
 
-.docs pre {
+.docs-code {
 	margin-block: var(--space-30);
-	padding: var(--space-10) 16px;
-	border: 1px solid var(--color-rule);
-	border-radius: 4px;
-	background: var(--color-surface);
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+/* A tab, the way an editor names the file you are looking at. */
+.docs-code-head {
+	padding: 12px 16px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+	color: #ffffff;
+}
+
+.docs-code-tab {
+	display: inline-flex;
+	/* The underline sits on the header's rule rather than above it. */
+	margin-bottom: -1px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid currentColor;
+	font-size: 14px;
+}
+
+.docs pre {
+	margin: 0;
+	padding: 14px 16px;
 	overflow-x: auto;
 }
 
@@ -175,14 +193,39 @@ body {
 	font-size: 14px;
 }
 
-.diagram {
-	margin: var(--space-30) 0;
+/* Each gesture is its own block, and they alternate side to side down the section. */
+.gestures {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	column-gap: var(--space-30);
+	row-gap: var(--space-60);
 }
 
-.diagram img {
+.gesture {
+	margin: 0;
+	grid-column: 1 / 5;
+}
+
+.gesture:nth-child(even) {
+	grid-column: 2 / -1;
+}
+
+.gesture img {
 	display: block;
 	width: 100%;
 	height: auto;
+	margin-top: var(--space-10);
+}
+
+@media (max-width: 720px) {
+	.gestures {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gesture,
+	.gesture:nth-child(even) {
+		grid-column: 1 / -1;
+	}
 }
 
 /* The demo's panels look this way because of these rules, not because of the library. */
@@ -220,7 +263,9 @@ body {
 }
 
 .footer-copyright {
-	grid-column: 1 / span 2;
+	/* The mirror of the wordmark: last two columns, hard against the right edge. */
+	grid-column: 5 / -1;
+	justify-self: end;
 	white-space: nowrap;
 	font: inherit;
 }

@@ -19,7 +19,7 @@ function Page() {
 							resize by dragging an edge, and split or join by dragging a corner.
 						</p>
 						<Code lang="tsx">{`npm install react-blender-panels`}</Code>
-						<Code lang="tsx">{`import { useState } from 'react'
+						<Code lang="tsx" name="App.tsx">{`import { useState } from 'react'
 import { Panels } from 'react-blender-panels'
 import type { Panel } from 'react-blender-panels'
 
@@ -62,21 +62,23 @@ const [panels, setPanels] = useState<MyPanel[]>([
 							Three of them, all on the panels themselves. Splits and joins preview while you drag
 							and only commit when you let go. Escape cancels.
 						</p>
-						<p>Resize: drag a shared edge. Every panel touching that line moves w/ it.</p>
-						<figure className="diagram">
-							<img src={resizeDiagram} alt="Dragging a shared edge to a new position" />
-						</figure>
-						<p>
-							Split: drag a corner inward. It divides where you release. Sideways gives you a seam
-							down the middle, up or down gives you one across.
-						</p>
-						<figure className="diagram">
-							<img src={splitDiagram} alt="Dragging a corner inward to divide a panel in two" />
-						</figure>
-						<p>Join: drag a corner across into a neighbour. Your panel takes its space.</p>
-						<figure className="diagram">
-							<img src={joinDiagram} alt="Dragging a corner across into a neighbour to swallow it" />
-						</figure>
+						<div className="gestures">
+							<figure className="gesture">
+								<figcaption>Resize: drag a shared edge. Every panel touching that line moves w/ it.</figcaption>
+								<img src={resizeDiagram} alt="Dragging a shared edge to a new position" />
+							</figure>
+							<figure className="gesture">
+								<figcaption>
+									Split: drag a corner inward. It divides where you release. Sideways gives you a
+									seam down the middle, up or down gives you one across.
+								</figcaption>
+								<img src={splitDiagram} alt="Dragging a corner inward to divide a panel in two" />
+							</figure>
+							<figure className="gesture">
+								<figcaption>Join: drag a corner across into a neighbour. Your panel takes its space.</figcaption>
+								<img src={joinDiagram} alt="Dragging a corner across into a neighbour to swallow it" />
+							</figure>
+						</div>
 					</div>
 				</section>
 
@@ -86,7 +88,7 @@ const [panels, setPanels] = useState<MyPanel[]>([
 					<h2>Styling</h2>
 					<div className="body">
 						<p>The panels are yours so their look is your CSS.</p>
-						<Code lang="tsx">{`const style = {
+						<Code lang="tsx" name="styles.ts">{`const style = {
   '--rbp-gap': '6px',                        // between panels, never around them
   '--rbp-edge-size': '8px',                // grab reach either side of an edge handle
   '--rbp-corner-size': '12px',               // the corner handle's square
@@ -116,7 +118,7 @@ const [panels, setPanels] = useState<MyPanel[]>([
 </Panels>`}</Code>
 					</div>
 				</section>
-		</article>
+			</article>
 		</main>
 	)
 }

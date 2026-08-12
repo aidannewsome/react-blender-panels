@@ -3,9 +3,9 @@ import type { Panel } from '../src/index.ts'
 import { Panels } from '../src/index.ts'
 
 const START: Panel[] = [
-	{ id: 'viewport', x: 0, y: 0, w: 0.7, h: 1 },
-	{ id: 'outliner', x: 0.7, y: 0, w: 0.3, h: 0.4 },
-	{ id: 'properties', x: 0.7, y: 0.4, w: 0.3, h: 0.6 },
+	{ id: 'panel-a', x: 0, y: 0, w: 0.7, h: 1 },
+	{ id: 'panel-b', x: 0.7, y: 0, w: 0.3, h: 0.4 },
+	{ id: 'panel-c', x: 0.7, y: 0.4, w: 0.3, h: 0.6 },
 ]
 
 /** The page's own voice: handles invisible, and a preview outlined in the text colour. */
@@ -22,7 +22,7 @@ function round(value: number): string {
 	return String(Math.round(value * 100) / 100)
 }
 
-/** An id as the component it would be: outliner reads <Outliner />, panel-4 reads <Panel4 />. */
+/** An id as the component it would be: panel-a reads <PanelA />, panel-4 reads <Panel4 />. */
 function component(id: string): string {
 	const name = id.replace(/(^|[-_])(\w)/g, (_, __, letter: string) => letter.toUpperCase())
 	return `<${name} />`
