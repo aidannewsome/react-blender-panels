@@ -201,7 +201,8 @@ const [panels, setPanels] = useState<MyPanel[]>([
 <Panels value={panels} onChange={setPanels} style={style}>
   {(panel) => <div className="demo-panel">{panel.id}</div>}
 </Panels>`}</Code>
-						<Code lang="css">{`.demo-panel {
+						<Code lang="css">{`/* site.css */
+.demo-panel {
   display: grid;
   place-items: center;
   border: 1px solid #1d1d1f;
