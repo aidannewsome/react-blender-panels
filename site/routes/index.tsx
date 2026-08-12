@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Demo } from '../Demo'
-import contentDiagram from '../../diagrams/content.svg?url'
 import joinDiagram from '../../diagrams/join.svg?url'
 import resizeDiagram from '../../diagrams/resize.svg?url'
 import splitDiagram from '../../diagrams/split.svg?url'
@@ -13,24 +12,11 @@ function Page() {
 		<main className="page">
 			<article className="docs">
 				<section>
-					<h2>Demo</h2>
+					<h2>Getting started</h2>
 					<div className="body">
 						<p>
 							Blender-style panels for React. Give it a div to fill and it splits into panels you can
 							resize by dragging an edge, and split or join by dragging a corner.
-						</p>
-						<Demo />
-					</div>
-				</section>
-
-				<hr className="divider" />
-
-				<section>
-					<h2>Getting started</h2>
-					<div className="body">
-						<p>
-							You own the panels. Pass in an array, save the new one it hands back after every drag, and
-							pass a function as the child to say what goes inside each one.
 						</p>
 						<Code lang="tsx">{`npm install react-blender-panels`}</Code>
 						<Code lang="tsx">{`import { useState } from 'react'
@@ -63,9 +49,7 @@ const [panels, setPanels] = useState<MyPanel[]>([
     }}
   </Panels>
 </div>`}</Code>
-						<figure className="diagram">
-							<img src={contentDiagram} alt="Each panel's kind chooses the component rendered inside it" />
-						</figure>
+						<Demo />
 					</div>
 				</section>
 
