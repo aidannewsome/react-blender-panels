@@ -14,7 +14,7 @@
 	--space-60: 60px;
 	--space-120: 120px;
 	/* The air the sticky bar keeps above its row, before its own rule. */
-	--header-padding: var(--space-30);
+	--header-padding: 40px;
 	--section-padding-bottom: 160px;
 	--page-gutter: clamp(15px, 1.75vw, var(--space-30));
 	--page-width: 1200px;
@@ -100,9 +100,9 @@ body {
 	padding: 0 var(--page-gutter);
 }
 
-/* The page opens well clear of the bar. */
+/* The page opens clear of the bar. */
 .docs section:first-child {
-	padding-top: var(--space-120);
+	padding-top: var(--space-60);
 }
 
 /* A section owns its rhythm: its title in the first column, everything else through the fifth. */
@@ -157,7 +157,7 @@ body {
 
 /* A section opens with its description, then breathes before the content it introduces. */
 .docs .body > p:first-child {
-	margin-bottom: var(--space-60);
+	margin-bottom: 2lh;
 }
 
 .docs pre {
