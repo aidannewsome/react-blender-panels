@@ -24,7 +24,6 @@
 		"build": "vite build",
 		"start": "node .output/server/index.mjs",
 		"build:package": "rm -rf dist && tsc -p tsconfig.build.json && find dist -name '*.d.ts' -exec sed -i '' -E \"s/(from '\\\\.[^']*)\\\\.tsx?'/\\\\1.js'/g\" {} + && esbuild src/index.ts --bundle --format=esm --outfile=dist/index.js --external:react --external:react/jsx-runtime --sourcemap --log-level=warning --banner:js='/*! react-blender-panels | MIT | (c) Maquette, Inc. */'",
-		"diagrams": "node scripts/export-diagrams.mjs",
 		"prepublishOnly": "npm run build:package",
 		"typecheck": "tsc --noEmit"
 	},
