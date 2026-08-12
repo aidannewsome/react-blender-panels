@@ -51,6 +51,10 @@ function Root() {
 				<hr className="divider" />
 			</header>
 			<Outlet />
+			<footer className="footer">
+				<hr className="divider" />
+				<small className="footer-copyright">© 2026 Maquette, Inc.</small>
+			</footer>
 		</RootDocument>
 	)
 }

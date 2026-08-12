@@ -207,3 +207,16 @@ body {
 	font-size: 14px;
 	overflow: hidden;
 }
+
+/* The footer carries its own rule, the way the bar does. */
+.footer {
+	max-width: var(--page-width);
+	margin: 0 auto;
+	padding: 0 var(--page-gutter) var(--space-60);
+}
+
+.footer-copyright {
+	display: block;
+	padding-top: var(--space-30);
+	font: inherit;
+}
