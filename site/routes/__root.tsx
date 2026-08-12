@@ -1,10 +1,12 @@
 import type { ReactNode } from 'react'
 import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
+import interCss from '@fontsource-variable/inter/index.css?url'
 import siteCss from '../site.css?url'
 
 const TITLE = 'React Blender Panels'
 const DESCRIPTION =
 	'Blender-style panels for React. Give it a div to fill and it splits into panels you resize by dragging an edge, and split or join by dragging a corner.'
+const SITE = 'https://reactblenderpanels.com'
 const GITHUB = 'https://github.com/aidannewsome/react-blender-panels'
 const NPM = 'https://www.npmjs.com/package/react-blender-panels'
 
@@ -18,9 +20,16 @@ export const Route = createRootRoute({
 			{ property: 'og:title', content: TITLE },
 			{ property: 'og:description', content: DESCRIPTION },
 			{ property: 'og:type', content: 'website' },
+			{ property: 'og:url', content: SITE },
+			{ property: 'og:image', content: `${SITE}/og.png` },
 			{ name: 'twitter:card', content: 'summary_large_image' },
+			{ name: 'twitter:image', content: `${SITE}/og.png` },
 		],
-		links: [{ rel: 'stylesheet', href: siteCss }],
+		links: [
+			{ rel: 'stylesheet', href: interCss },
+			{ rel: 'stylesheet', href: siteCss },
+			{ rel: 'canonical', href: SITE },
+		],
 	}),
 	component: Root,
 })
