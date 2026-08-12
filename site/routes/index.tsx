@@ -153,18 +153,16 @@ const [panels, setPanels] = useState<MyPanel[]>([
 				<hr className="divider" />
 
 				<section>
-					<h2>Demos</h2>
+					<h2>Demo</h2>
 					<div className="body">
 						<p>
-							Drag an edge to resize, a corner inward to split, a corner across to join. Both of
-							these are styled entirely by the page, since the library never dresses what you put
-							in a panel.
+							Drag an edge to resize, a corner inward to split, a corner across to join. It is styled
+							entirely by the page, since the library never dresses what you put in a panel.
 						</p>
-						<p>With handles: the edges and corners show themselves as you pass over them.</p>
-						<Demo />
 						<Code lang="tsx">{`const style = {
   '--rbp-gap': '4px',
-  '--rbp-edge-color': 'rgba(0, 0, 0, 0.25)',
+  '--rbp-edge-color': 'transparent',   // the handles vanish
+  '--rbp-corner-color': 'transparent', // every gesture still works
   '--rbp-preview-border': '#1d1d1f',
   '--rbp-preview-radius': '4px',
 }
@@ -172,22 +170,7 @@ const [panels, setPanels] = useState<MyPanel[]>([
 <Panels value={panels} onChange={setPanels} style={style}>
   {(panel) => <div className="demo-panel">{panel.id}</div>}
 </Panels>`}</Code>
-						<Code lang="css">{`/* site.css */
-.demo-panel {
-  display: grid;
-  place-items: center;
-  border: 1px solid #1d1d1f;
-  border-radius: 4px;
-  background: #fff;
-  overflow: hidden;
-}`}</Code>
-						<p>Without handles: the same gestures, nothing shown until a drag previews.</p>
-						<Demo look="bare" />
-						<Code lang="tsx">{`const style = {
-  '--rbp-gap': '4px',
-  '--rbp-edge-color': 'transparent',
-  '--rbp-corner-color': 'transparent',
-}`}</Code>
+						<Demo />
 					</div>
 				</section>
 

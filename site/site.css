@@ -208,15 +208,28 @@ body {
 	overflow: hidden;
 }
 
-/* The footer carries its own rule, the way the bar does. */
+/* The footer carries its own rule, the way the bar does, and sits on the page's grid. */
 .footer {
+	display: grid;
+	grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+	column-gap: var(--space-30);
 	max-width: var(--page-width);
 	margin: 0 auto;
 	padding: 0 var(--page-gutter) var(--space-60);
 }
 
+.footer .divider {
+	grid-column: 1 / -1;
+	margin-bottom: var(--space-30);
+}
+
 .footer-copyright {
-	display: block;
-	padding-top: var(--space-30);
+	grid-column: 6;
 	font: inherit;
+}
+
+@media (max-width: 720px) {
+	.footer-copyright {
+		grid-column: 1 / -1;
+	}
 }

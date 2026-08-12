@@ -8,29 +8,20 @@ const START: Panel[] = [
 	{ id: 'properties', x: 0.7, y: 0.4, w: 0.3, h: 0.6 },
 ]
 
-const LOOKS = {
-	/** The page's own voice: a gap, a visible line, and a preview outlined in the text colour. */
-	handles: {
-		'--rbp-gap': '4px',
-		'--rbp-edge-color': 'rgba(0, 0, 0, 0.25)',
-		'--rbp-preview-border': '#1d1d1f',
-		'--rbp-preview-radius': '4px',
-	},
-	/** The same, w/ nothing to see. */
-	bare: {
-		'--rbp-gap': '4px',
-		'--rbp-edge-color': 'transparent',
-		'--rbp-corner-color': 'transparent',
-		'--rbp-preview-border': '#1d1d1f',
-		'--rbp-preview-radius': '4px',
-	},
+/** The page's own voice: handles invisible, and a preview outlined in the text colour. */
+const STYLE = {
+	'--rbp-gap': '4px',
+	'--rbp-edge-color': 'transparent',
+	'--rbp-corner-color': 'transparent',
+	'--rbp-preview-border': '#1d1d1f',
+	'--rbp-preview-radius': '4px',
 }
 
-export function Demo({ look = 'handles' }: { look?: keyof typeof LOOKS }) {
+export function Demo() {
 	const [panels, setPanels] = useState(START)
 	return (
 		<div className="demo">
-			<Panels value={panels} onChange={setPanels} style={LOOKS[look]}>
+			<Panels value={panels} onChange={setPanels} style={STYLE}>
 				{(panel) => <div className="demo-panel">{panel.id}</div>}
 			</Panels>
 		</div>
