@@ -1,0 +1,147 @@
+# React Blender Panels
+
+Blender-style panels for React. Give it a div to fill and it splits into panels you can resize by
+dragging an edge, and split or join by dragging a corner.
+
+One component, no stylesheet, no dependencies beyond React. About 4.3 KB gzipped.
+
+## The model
+
+A layout is a flat array of rectangles, each one a panel, together tiling the div exactly. The
+fractions add up and nothing overlaps. No tree and no groups, so adjacency is just geometry.
+
+```ts
+interface Panel {
+  id: string
+  x: number // left edge, as a fraction of the div (0–1)
+  y: number // top edge
+  w: number // width
+  h: number // height
+}
+```
+
+Because they are fractions rather than pixels, the same array works at any size, and it serialises
+as plain JSON.
+
+## Getting started
+
+You own the panels. Pass in an array and save the new one handed back after every gesture.
+
+```tsx
+import { Panels } from 'react-blender-panels'
+import type { Panel } from 'react-blender-panels'
+
+const [panels, setPanels] = useState<Panel[]>([
+  { id: 'viewport',   x: 0,   y: 0,   w: 0.7, h: 1   },
+  { id: 'outliner',   x: 0.7, y: 0,   w: 0.3, h: 0.4 },
+  { id: 'properties', x: 0.7, y: 0.4, w: 0.3, h: 0.6 },
+])
+
+<div style={{ width: '100%', height: 500 }}>
+  <Panels value={panels} onChange={setPanels}>
+    {(panel) => <div>{panel.id}</div>}
+  </Panels>
+</div>
+```
+
+## Your content
+
+Pass a function as the child. It runs once for each panel and returns what to render inside it.
+`Panel` is the minimum shape the library needs. Add your own fields and they come back to you
+typed, both in that function and from `onChange`.
+
+```tsx
+const CONTENT = {
+  viewport: Viewport,
+  outliner: Outliner,
+  properties: Properties,
+}
+
+interface MyPanel extends Panel {
+  kind: keyof typeof CONTENT
+}
+
+<Panels value={panels} onChange={setPanels}>
+  {(panel) => {
+    const Content = CONTENT[panel.kind]
+    return <Content />
+  }}
+</Panels>
+```
+
+Your own fields ride along untouched, which is what makes this work. Split a panel and the new one
+is a copy, so it renders the same content until you change it. A panel switcher is just setting
+`kind` on one panel and saving the array, so the arrangement and what is in it save together.
+
+Your component fills the panel on its own. Panels are grid containers w/ a `minmax(0, 1fr)` track,
+so a single child stretches to the rectangle and may shrink below its own content. What happens to
+content that no longer fits (scroll, clip, ellipsis) is yours to decide. The library never clips a
+panel, so your dropdowns and tooltips can escape it.
+
+## Props
+
+`<Panels>`
+
+- `value: Panel[]`. The panels.
+- `onChange: (panels: Panel[]) => void`. The next panels after a gesture. Save it, render from it.
+- `children: (panel: Panel) => ReactNode`. What to render inside each panel.
+- `minSize?: number`. Pixels. No panel is dragged or split below this. Default 24.
+- `className?: string`, `style?: CSSProperties`. Applied to the library's own div.
+
+## Gestures
+
+Three, and they all live on the panels themselves.
+
+- **Resize**. Drag a shared edge. Every panel touching that line moves w/ it, live, so the panels
+  follow the pointer.
+- **Split**. Drag a corner inward. It divides where you release. Sideways gives you a seam down the
+  middle, up or down gives you one across.
+- **Join**. Drag a corner across into a neighbour. Your panel takes its space. Only legal where the
+  two share a whole side, since anything else would leave a hole.
+
+Split and join preview while you drag and commit when you let go. Escape cancels from anywhere.
+
+## Styling
+
+The panels are yours so their look is your CSS. The library ships no stylesheet. The geometry the
+gestures depend on travels inline, and everything else is a custom property you can set on the
+component or anywhere above it.
+
+```tsx
+const style = {
+  '--rbp-gap': '6px',                        // between panels, never around them
+  '--rbp-edge-size': '8px',                // grab reach either side of an edge handle
+  '--rbp-corner-size': '12px',               // the corner handle's square
+
+  '--rbp-edge-color': 'rgba(0, 0, 0, 0.3)',  // the line a hovered edge handle shows
+  '--rbp-corner-color': 'rgba(0, 0, 0, 0.3)',    // a hovered corner handle, defaults to the edge colour
+  '--rbp-preview-border': 'rgba(0, 0, 0, 0.55)', // outline of what a release would do
+  '--rbp-preview-fill': 'rgba(0, 0, 0, 0.04)',   // and its wash
+  '--rbp-preview-radius': '4px',
+  '--rbp-preview-fade': '240ms',             // how long a preview takes to appear
+
+  '--rbp-cursor-corner': 'crosshair',        // over a corner handle
+  '--rbp-cursor-resize-x': 'col-resize',     // over a vertical edge
+  '--rbp-cursor-resize-y': 'row-resize',     // over a horizontal edge
+  '--rbp-cursor-join-e': 'e-resize',         // about to swallow the neighbour east
+  '--rbp-cursor-join-w': 'w-resize',
+  '--rbp-cursor-join-n': 'n-resize',
+  '--rbp-cursor-join-s': 's-resize',
+  '--rbp-cursor-blocked': 'not-allowed',     // this gesture is illegal here
+}
+
+<Panels value={panels} onChange={setPanels} style={style}>
+  {(panel) => <MyContent panel={panel} />}
+</Panels>
+```
+
+Set `--rbp-edge-color` and `--rbp-corner-color` to `transparent` to keep the gestures working with
+no visual feedback. Set `--rbp-edge-size` or `--rbp-corner-size` to `0px` to remove the hit areas
+themselves.
+
+The gap only ever appears *between* panels. Each panel gives up half a gap on every side that has a
+neighbour and nothing on the sides that touch the container. For space around the outside, use
+padding on your own div.
+
+Every element the library renders has a stable class: `.rbp-panels`, `.rbp-panel`, `.rbp-edge-handle`,
+`.rbp-line`, `.rbp-corner-handle`, `.rbp-preview`.

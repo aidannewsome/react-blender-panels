@@ -1,0 +1,15 @@
+# React Blender Panels
+
+> Blender-style panels for React. Give it a div to fill and it splits into panels you can resize by
+> dragging an edge, and split or join by dragging a corner. One component, no stylesheet, no
+> dependencies beyond React.
+
+A layout is a flat array of rectangles in fractions of the div (0 to 1) that tile it exactly. You
+own that array. Pass it in as `value` and save the array handed back to `onChange`. Panels can
+carry your own fields, which survive every gesture.
+
+## Docs
+
+- [Full documentation](/llms-full.txt). The complete API, the panel model, the three gestures, and
+  every styling custom property.
+- [Home](/). The same docs as a page, w/ diagrams and live demos.

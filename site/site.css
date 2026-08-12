@@ -1,0 +1,214 @@
+@font-face {
+	font-family: 'Rima';
+	src: url('/fonts/Rima-Regular.otf') format('opentype');
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+}
+
+/* The same small token layer the Flatwriter site keeps, so the two read as one family. Raw values
+   live here and page rules only consume them. */
+:root {
+	color-scheme: light;
+
+	--color-background: #f5f5f7;
+	--color-surface: #ffffff;
+	--color-text: #1d1d1f;
+	--color-divider: rgba(29, 29, 31, 0.45);
+	--color-rule: rgba(29, 29, 31, 0.14);
+
+	--space-10: 10px;
+	--space-30: 30px;
+	--space-60: 60px;
+	--space-120: 120px;
+	/* The air the sticky bar keeps above its row, before its own rule. */
+	--header-padding: var(--space-30);
+	--page-gutter: clamp(15px, 1.75vw, var(--space-30));
+	--page-width: 1200px;
+	--layout-columns: 6;
+	--sticky-clearance: calc(25px + (2 * var(--header-padding)));
+
+	font-family: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+	color: var(--color-text);
+	background: var(--color-background);
+	font-synthesis: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	min-width: 320px;
+	scroll-behavior: smooth;
+	scroll-padding-top: var(--sticky-clearance);
+	background: var(--color-background);
+}
+
+body {
+	margin: 0;
+	background: var(--color-background);
+}
+
+/* The bar and the page's first rule travel together, so the rule sticks with it. */
+.header {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	display: grid;
+	grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+	grid-template-rows: max-content;
+	align-items: center;
+	column-gap: var(--space-30);
+	row-gap: var(--header-padding);
+	max-width: var(--page-width);
+	margin: 0 auto;
+	padding: var(--header-padding) var(--page-gutter) 0;
+	background: var(--color-background);
+}
+
+.header .divider {
+	grid-column: 1 / -1;
+	grid-row: 2;
+}
+
+.site-name {
+	grid-column: 1 / span 2;
+	grid-row: 1;
+	font-family: 'Rima', sans-serif;
+	line-height: 1;
+}
+
+.site-links {
+	grid-column: 6;
+	grid-row: 1;
+	display: flex;
+	justify-content: flex-end;
+	gap: 18px;
+}
+
+.site-links a {
+	display: inline-flex;
+	color: inherit;
+}
+
+.divider {
+	width: 100%;
+	height: 0;
+	margin: 0;
+	border: 0;
+	border-top: 0.5px solid var(--color-divider);
+}
+
+.page {
+	max-width: var(--page-width);
+	margin: 0 auto;
+	padding: 0 var(--page-gutter);
+}
+
+/* A section owns its rhythm: its title in the first column, everything else through the fifth. */
+.docs section {
+	display: grid;
+	grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+	column-gap: var(--space-30);
+	padding: var(--space-30) 0 var(--space-60);
+}
+
+.docs section:last-child {
+	padding-bottom: var(--space-120);
+}
+
+.docs h2 {
+	grid-column: 1;
+	margin: 0;
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+.docs .body {
+	grid-column: 2 / -1;
+}
+
+.docs section:first-child .body {
+	grid-column: 1 / -1;
+}
+
+/* Narrow screens have no room for a title column, so a section stacks and fills the width. */
+@media (max-width: 720px) {
+	.docs section {
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: var(--space-10);
+	}
+
+	.docs h2,
+	.docs .body,
+	.docs section:first-child .body {
+		grid-column: 1 / -1;
+	}
+
+	.docs p {
+		max-width: none;
+	}
+}
+
+.docs .body > * {
+	margin: 0 0 var(--space-10);
+}
+
+.docs .body > *:last-child {
+	margin-bottom: 0;
+}
+
+.docs p {
+	max-width: 62ch;
+}
+
+.docs pre {
+	margin-block: var(--space-30);
+	padding: var(--space-10) 16px;
+	border: 1px solid var(--color-rule);
+	border-radius: 4px;
+	background: var(--color-surface);
+	overflow-x: auto;
+}
+
+/* A lone snippet is the section's content, so it starts at the top of the section like prose. */
+.docs .body > .docs-code:first-child pre {
+	margin-top: 0;
+}
+
+.docs pre,
+.docs code,
+.docs kbd {
+	font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+	font-size: 14px;
+}
+
+.diagram {
+	margin: var(--space-30) 0;
+}
+
+.diagram img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* The demo's panels look this way because of these rules, not because of the library. */
+.demo {
+	height: 460px;
+	margin: var(--space-30) 0;
+}
+
+.demo-panel {
+	display: grid;
+	place-items: center;
+	border: 1px solid var(--color-text);
+	border-radius: 4px;
+	background: var(--color-surface);
+	font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+	font-size: 14px;
+	overflow: hidden;
+}

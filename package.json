@@ -1,0 +1,58 @@
+{
+	"name": "react-blender-panels",
+	"version": "0.1.0",
+	"description": "Blender-style panel layout for React: a flat grid of panels you split by dragging corners, join by dragging into a neighbour, and resize along whole shared edges.",
+	"license": "MIT",
+	"author": "Maquette, Inc.",
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"dev": "vite",
+		"build": "rm -rf dist && tsc -p tsconfig.build.json && find dist -name '*.d.ts' -exec sed -i '' -E \"s/(from '\\\\.[^']*)\\\\.tsx?'/\\\\1.js'/g\" {} + && esbuild src/index.ts --bundle --format=esm --outfile=dist/index.js --external:react --external:react/jsx-runtime --sourcemap --log-level=warning --banner:js='/*! react-blender-panels | MIT | (c) Maquette, Inc. */'",
+		"typecheck": "tsc --noEmit",
+		"prepublishOnly": "npm run build"
+	},
+	"peerDependencies": {
+		"react": "^18.0.0 || ^19.0.0"
+	},
+	"devDependencies": {
+		"@tanstack/react-router": "^1.170.25",
+		"@tanstack/react-start": "^1.168.42",
+		"@types/react": "^19.0.0",
+		"@types/react-dom": "^19.0.0",
+		"@vitejs/plugin-react": "^4.3.0",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"shiki": "^4.4.3",
+		"typescript": "^5.7.0",
+		"vite": "^7.3.6"
+	},
+	"keywords": [
+		"react",
+		"panels",
+		"layout",
+		"blender",
+		"resizable",
+		"tiling"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/aidannewsome/react-blender-panels.git"
+	},
+	"homepage": "https://github.com/aidannewsome/react-blender-panels#readme",
+	"bugs": {
+		"url": "https://github.com/aidannewsome/react-blender-panels/issues"
+	},
+	"module": "./dist/index.js",
+	"sideEffects": false
+}
