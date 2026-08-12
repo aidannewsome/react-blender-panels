@@ -5,6 +5,9 @@
 	"license": "MIT",
 	"author": "Maquette, Inc.",
 	"type": "module",
+	"engines": {
+		"node": ">=22"
+	},
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"exports": {
