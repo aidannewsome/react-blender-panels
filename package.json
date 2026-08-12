@@ -1,6 +1,6 @@
 {
 	"name": "react-blender-panels",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Blender-style panel layout for React: a flat grid of panels you split by dragging corners, join by dragging into a neighbour, and resize along whole shared edges.",
 	"license": "MIT",
 	"author": "Maquette, Inc.",
