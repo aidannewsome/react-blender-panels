@@ -70,6 +70,8 @@ body {
 .site-name {
 	grid-column: 1 / span 2;
 	grid-row: 1;
+	/* Two columns are narrow on a phone, and the name would rather run past them than stack. */
+	white-space: nowrap;
 	line-height: 1;
 }
 
