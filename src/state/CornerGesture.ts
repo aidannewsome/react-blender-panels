@@ -8,6 +8,7 @@ import type { Context, Pointer } from './State.ts'
 export class CornerGesture extends State {
 	panel: Panel | null = null
 	origin: Point = { x: 0, y: 0 }
+	at: Point = { x: 0, y: 0 }
 	outcome: Outcome = NONE
 
 	constructor(context: Context) {
@@ -37,12 +38,14 @@ class CornerDragging extends State {
 
 	onEnter(): void {
 		this.gesture.outcome = NONE
+		this.gesture.at = this.gesture.origin
 	}
 
 	/** Decide as we go: inward divides this panel, across onto a full-edge neighbour swallows it. */
 	onPointerMove(event: Pointer): boolean {
 		const { panel, origin } = this.gesture
 		if (!panel) return true
+		this.gesture.at = event.at
 		this.gesture.outcome = getOutcome(panel, this.context.getPanels(), this.context.getMinimum(), origin, event.at)
 		this.context.update()
 		return true
@@ -65,10 +68,14 @@ class CornerDragging extends State {
 	}
 
 	protected cursorName(): string | null {
-		const { outcome } = this.gesture
+		const { outcome, origin, at } = this.gesture
 		if (outcome.kind === 'join') return `join-${outcome.towards}`
 		// A split is a seam being placed, so it wears the same cursor as moving one.
 		if (outcome.kind === 'split') return outcome.direction === 'row' ? 'resize-x' : 'resize-y'
-		return 'blocked'
+		// Until the drag is far enough to mean either gesture there is nothing to refuse yet, so it
+		// keeps the corner's own cursor and only reads as blocked once a real answer came back no.
+		const minimum = this.context.getMinimum()
+		const undecided = Math.abs(at.x - origin.x) < minimum.x && Math.abs(at.y - origin.y) < minimum.y
+		return undecided ? null : 'blocked'
 	}
 }
