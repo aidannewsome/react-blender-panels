@@ -2,13 +2,13 @@
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"noEmit": false,
-		"emitDeclarationOnly": true,
 		"declaration": true,
 		"declarationMap": true,
+		"sourceMap": true,
 		"outDir": "dist",
 		"rootDir": "src",
 		// Our source imports carry .ts extensions so the pure modules run under bare Node. This
-		// rewrites them to .js in the declarations, which is what a consumer needs to see.
+		// rewrites them to .js in the emitted JS. Declarations need the sed in build:package.
 		"rewriteRelativeImportExtensions": true
 	},
 	"include": ["src"]
