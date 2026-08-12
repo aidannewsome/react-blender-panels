@@ -73,7 +73,7 @@ Your own fields ride along untouched, which is what makes this work. Split a pan
 is a copy, so it renders the same content until you change it. A panel switcher is just setting
 `kind` on one panel and saving the array, so the arrangement and what is in it save together.
 
-Your component fills the panel on its own. Panels are grid containers w/ a `minmax(0, 1fr)` track,
+Your component fills the panel on its own. Panels are grid containers with a `minmax(0, 1fr)` track,
 so a single child stretches to the rectangle and may shrink below its own content. What happens to
 content that no longer fits (scroll, clip, ellipsis) is yours to decide. The library never clips a
 panel, so your dropdowns and tooltips can escape it.
@@ -92,7 +92,7 @@ panel, so your dropdowns and tooltips can escape it.
 
 Three, and they all live on the panels themselves.
 
-- **Resize**. Drag a shared edge. Every panel touching that line moves w/ it, live, so the panels
+- **Resize**. Drag a shared edge. Every panel touching that line moves with it, live, so the panels
   follow the pointer.
 - **Split**. Drag a corner inward. It divides where you release. Sideways gives you a seam down the
   middle, up or down gives you one across.

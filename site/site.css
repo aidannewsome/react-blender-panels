@@ -223,14 +223,6 @@ body {
 	grid-column: 2 / -1;
 }
 
-.gesture-name {
-	display: block;
-	margin-bottom: var(--space-10);
-}
-
-.gesture p {
-	margin: 0;
-}
 
 @media (max-width: 720px) {
 	.gesture,

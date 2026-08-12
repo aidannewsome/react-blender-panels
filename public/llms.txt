@@ -12,4 +12,4 @@ carry your own fields, which survive every gesture.
 
 - [Full documentation](https://reactblenderpanels.com/llms-full.txt). The complete API, the panel model, the three gestures, and
   every styling custom property.
-- [Home](https://reactblenderpanels.com/). The same docs as a page, w/ diagrams and live demos.
+- [Home](https://reactblenderpanels.com/). The same docs as a page, with diagrams and live demos.

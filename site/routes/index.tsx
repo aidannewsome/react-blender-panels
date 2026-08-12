@@ -30,15 +30,15 @@ interface MyPanel extends Panel {
 }
 
 const CONTENT = {
-  viewport: Viewport,
-  outliner: Outliner,
-  properties: Properties,
+  a: PanelA,
+  b: PanelB,
+  c: PanelC,
 }
 
 const [panels, setPanels] = useState<MyPanel[]>([
-  { id: 'a', kind: 'viewport',   x: 0,   y: 0,   w: 0.7, h: 1   },
-  { id: 'b', kind: 'outliner',   x: 0.7, y: 0,   w: 0.3, h: 0.4 },
-  { id: 'c', kind: 'properties', x: 0.7, y: 0.4, w: 0.3, h: 0.6 },
+  { id: 'panel-a', kind: 'a', x: 0,   y: 0,   w: 0.7, h: 1   },
+  { id: 'panel-b', kind: 'b', x: 0.7, y: 0,   w: 0.3, h: 0.4 },
+  { id: 'panel-c', kind: 'c', x: 0.7, y: 0.4, w: 0.3, h: 0.6 },
 ])
 
 <div style={{ width: '100%', height: 500 }}>
@@ -58,32 +58,23 @@ const [panels, setPanels] = useState<MyPanel[]>([
 				<section>
 					<h2>Gestures</h2>
 					<div className="body">
-						<p>
-							Three of them, all on the panels themselves. Splits and joins preview while you drag
-							and only commit when you let go. Escape cancels.
-						</p>
 						<div className="gestures">
 							<figure className="gesture">
 								<figcaption>
-									<span className="gesture-name">Resize</span>
-									<p>Drag a shared edge. Every panel touching that line moves w/ it.</p>
+									Drag a shared edge to resize. Every panel touching that line moves with it.
 								</figcaption>
 								<img src={resizeDiagram} alt="Dragging a shared edge to a new position" />
 							</figure>
 							<figure className="gesture">
 								<figcaption>
-									<span className="gesture-name">Split</span>
-									<p>
-										Drag a corner inward. It divides where you release. Sideways gives you a seam
-										down the middle, up or down gives you one across.
-									</p>
+									Drag a corner inward to split. It divides where you release, sideways for a seam
+									down the middle, up or down for one across.
 								</figcaption>
 								<img src={splitDiagram} alt="Dragging a corner inward to divide a panel in two" />
 							</figure>
 							<figure className="gesture">
 								<figcaption>
-									<span className="gesture-name">Join</span>
-									<p>Drag a corner across into a neighbour. Your panel takes its space.</p>
+									Drag a corner across into a neighbour to join. Your panel takes its space.
 								</figcaption>
 								<img src={joinDiagram} alt="Dragging a corner across into a neighbour to swallow it" />
 							</figure>
