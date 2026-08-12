@@ -17,12 +17,33 @@ const STYLE = {
 	'--rbp-preview-radius': '4px',
 }
 
+/** Two decimals, no trailing zeroes: 0.7 stays 0.7 and 0.35 stays 0.35. */
+function round(value: number): string {
+	return String(Math.round(value * 100) / 100)
+}
+
+/** An id as the component it would be: outliner reads <Outliner />, panel-4 reads <Panel4 />. */
+function component(id: string): string {
+	const name = id.replace(/(^|[-_])(\w)/g, (_, __, letter: string) => letter.toUpperCase())
+	return `<${name} />`
+}
+
 export function Demo() {
 	const [panels, setPanels] = useState(START)
 	return (
 		<div className="demo">
 			<Panels value={panels} onChange={setPanels} style={STYLE}>
-				{(panel) => <div className="demo-panel">{panel.id}</div>}
+				{(panel) => (
+					<div className="demo-panel">
+						<span>{component(panel.id)}</span>
+						<span>
+							x: {round(panel.x)} y: {round(panel.y)}
+						</span>
+						<span>
+							w: {round(panel.w)} h: {round(panel.h)}
+						</span>
+					</div>
+				)}
 			</Panels>
 		</div>
 	)

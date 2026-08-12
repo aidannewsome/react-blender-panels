@@ -199,7 +199,9 @@ body {
 
 .demo-panel {
 	display: grid;
-	place-items: center;
+	/* Centre the lines as a block: place-items would stretch them across the panel's height. */
+	place-content: center;
+	justify-items: center;
 	border: 1px solid var(--color-text);
 	border-radius: 4px;
 	background: var(--color-surface);
