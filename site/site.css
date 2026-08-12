@@ -12,7 +12,6 @@
 	--space-10: 10px;
 	--space-30: 30px;
 	--space-60: 60px;
-	--space-120: 120px;
 	/* The air the sticky bar keeps above its row, before its own rule. */
 	--header-padding: 40px;
 	--section-padding-bottom: 160px;
@@ -102,11 +101,6 @@ body {
 	padding: 0 var(--page-gutter);
 }
 
-/* The page opens clear of the bar. */
-.docs section:first-child {
-	padding-top: var(--space-60);
-}
-
 /* A section owns its rhythm: its title in the first column, everything else through the fifth. */
 .docs section {
 	display: grid;
@@ -115,6 +109,10 @@ body {
 	padding: var(--space-30) 0 var(--section-padding-bottom);
 }
 
+/* The page opens clear of the bar. */
+.docs section:first-child {
+	padding-top: var(--space-60);
+}
 
 .docs h2 {
 	grid-column: 1;
@@ -126,7 +124,6 @@ body {
 .docs .body {
 	grid-column: 2 / -1;
 }
-
 
 /* Narrow screens have no room for a title column, so a section stacks and fills the width. */
 @media (max-width: 720px) {
@@ -169,11 +166,6 @@ body {
 	border-radius: 4px;
 	background: var(--color-surface);
 	overflow-x: auto;
-}
-
-/* A lone snippet is the section's content, so it starts at the top of the section like prose. */
-.docs .body > .docs-code:first-child pre {
-	margin-top: 0;
 }
 
 .docs pre,
@@ -228,12 +220,7 @@ body {
 }
 
 .footer-copyright {
-	grid-column: 6;
+	grid-column: 1 / span 2;
+	white-space: nowrap;
 	font: inherit;
-}
-
-@media (max-width: 720px) {
-	.footer-copyright {
-		grid-column: 1 / -1;
-	}
 }
