@@ -14,7 +14,8 @@
 	--space-60: 60px;
 	--space-120: 120px;
 	/* The air the sticky bar keeps above its row, before its own rule. */
-	--header-padding: 45px;
+	--header-padding: var(--space-30);
+	--section-padding-bottom: 160px;
 	--page-gutter: clamp(15px, 1.75vw, var(--space-30));
 	--page-width: 1200px;
 	--layout-columns: 6;
@@ -99,22 +100,19 @@ body {
 	padding: 0 var(--page-gutter);
 }
 
+/* The page opens well clear of the bar. */
+.docs section:first-child {
+	padding-top: var(--space-120);
+}
+
 /* A section owns its rhythm: its title in the first column, everything else through the fifth. */
 .docs section {
 	display: grid;
 	grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
 	column-gap: var(--space-30);
-	padding: var(--space-30) 0 var(--space-60);
+	padding: var(--space-30) 0 var(--section-padding-bottom);
 }
 
-.docs section:last-child {
-	padding-bottom: var(--space-120);
-}
-
-/* The opening line is a title block, so it keeps its distance from the bar and from what follows. */
-.docs section:first-child {
-	padding: var(--space-60) 0 var(--space-120);
-}
 
 .docs h2 {
 	grid-column: 1;
@@ -127,9 +125,6 @@ body {
 	grid-column: 2 / -1;
 }
 
-.docs section:first-child .body {
-	grid-column: 1 / -1;
-}
 
 /* Narrow screens have no room for a title column, so a section stacks and fills the width. */
 @media (max-width: 720px) {
@@ -139,8 +134,7 @@ body {
 	}
 
 	.docs h2,
-	.docs .body,
-	.docs section:first-child .body {
+	.docs .body {
 		grid-column: 1 / -1;
 	}
 
@@ -159,6 +153,11 @@ body {
 
 .docs p {
 	max-width: 62ch;
+}
+
+/* A section opens with its description, then breathes before the content it introduces. */
+.docs .body > p:first-child {
+	margin-bottom: var(--space-60);
 }
 
 .docs pre {

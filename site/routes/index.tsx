@@ -14,17 +14,12 @@ function Page() {
 		<main className="page">
 			<article className="docs">
 				<section>
+					<h2>Getting started</h2>
 					<div className="body">
 						<p>
 							Blender-style panels for React. Give it a div to fill and it splits into panels you
 							can resize by dragging an edge, and split or join by dragging a corner.
 						</p>
-					</div>
-				</section>
-
-				<section>
-					<h2>Getting started</h2>
-					<div className="body">
 						<Code lang="tsx">{`npm install react-blender-panels`}</Code>
 						<p>You own the panels. Pass in an array and save the new one it hands back after every drag.</p>
 						<Code lang="tsx">{`import { Panels } from 'react-blender-panels'
@@ -54,8 +49,10 @@ const [panels, setPanels] = useState<Panel[]>([
 					</div>
 				</section>
 
+				<hr className="divider" />
+
 				<section>
-					<h2>Your content</h2>
+					<h2>Adding content</h2>
 					<div className="body">
 						<p>Pass a function as the child. It runs once per panel and returns what goes inside.</p>
 						<Code lang="tsx">{`import type { Panel } from 'react-blender-panels'
@@ -98,36 +95,18 @@ const [panels, setPanels] = useState<MyPanel[]>([
 							Three of them, all on the panels themselves. Splits and joins preview while you drag
 							and only commit when you let go. Escape cancels.
 						</p>
-					</div>
-				</section>
-
-				<section>
-					<h2>Resize</h2>
-					<div className="body">
-						<p>Drag a shared edge. Every panel touching that line moves w/ it.</p>
+						<p>Resize: drag a shared edge. Every panel touching that line moves w/ it.</p>
 						<figure className="diagram">
 							<img src={resizeDiagram} alt="Dragging a shared edge to a new position" />
 						</figure>
-					</div>
-				</section>
-
-				<section>
-					<h2>Split</h2>
-					<div className="body">
 						<p>
-							Drag a corner inward. It divides where you release. Sideways gives you a seam down the
-							middle, up or down gives you one across.
+							Split: drag a corner inward. It divides where you release. Sideways gives you a seam
+							down the middle, up or down gives you one across.
 						</p>
 						<figure className="diagram">
 							<img src={splitDiagram} alt="Dragging a corner inward to divide a panel in two" />
 						</figure>
-					</div>
-				</section>
-
-				<section>
-					<h2>Join</h2>
-					<div className="body">
-						<p>Drag a corner across into a neighbour. Your panel takes its space.</p>
+						<p>Join: drag a corner across into a neighbour. Your panel takes its space.</p>
 						<figure className="diagram">
 							<img src={joinDiagram} alt="Dragging a corner across into a neighbour to swallow it" />
 						</figure>
@@ -174,17 +153,15 @@ const [panels, setPanels] = useState<MyPanel[]>([
 				<hr className="divider" />
 
 				<section>
-					<h2>Demo</h2>
+					<h2>Demos</h2>
 					<div className="body">
 						<p>
-							Drag an edge handle to resize. Drag a corner handle inward to split, or across into a
-							neighbour to join.
+							Drag an edge to resize, a corner inward to split, a corner across to join. Both of
+							these are styled entirely by the page, since the library never dresses what you put
+							in a panel.
 						</p>
-						<p>
-							Both demos below use this, which is all it takes to put the panels in the page's voice
-							rather than the library's. The panels themselves are a div of ours w/ ordinary CSS,
-							since the library never styles what goes inside one.
-						</p>
+						<p>With handles: the edges and corners show themselves as you pass over them.</p>
+						<Demo />
 						<Code lang="tsx">{`const style = {
   '--rbp-gap': '4px',
   '--rbp-edge-color': 'rgba(0, 0, 0, 0.25)',
@@ -204,22 +181,13 @@ const [panels, setPanels] = useState<MyPanel[]>([
   background: #fff;
   overflow: hidden;
 }`}</Code>
-						<Demo />
-					</div>
-				</section>
-
-				<section>
-					<h2>Demo without handles</h2>
-					<div className="body">
-						<p>
-							Same gestures, nothing to see. Only the colours are off, so every drag still works.
-						</p>
+						<p>Without handles: the same gestures, nothing shown until a drag previews.</p>
+						<Demo look="bare" />
 						<Code lang="tsx">{`const style = {
   '--rbp-gap': '4px',
   '--rbp-edge-color': 'transparent',
   '--rbp-corner-color': 'transparent',
 }`}</Code>
-						<Demo look="bare" />
 					</div>
 				</section>
 
