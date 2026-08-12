@@ -3,7 +3,7 @@
 :root {
 	color-scheme: light;
 
-	--color-background: #f5f5f7;
+	--color-background: #ffffff;
 	--color-surface: #ffffff;
 	--color-text: #1d1d1f;
 	--color-divider: rgba(29, 29, 31, 0.45);
@@ -14,7 +14,7 @@
 	--space-60: 60px;
 	--space-120: 120px;
 	/* The air the sticky bar keeps above its row, before its own rule. */
-	--header-padding: var(--space-30);
+	--header-padding: 45px;
 	--page-gutter: clamp(15px, 1.75vw, var(--space-30));
 	--page-width: 1200px;
 	--layout-columns: 6;
@@ -109,6 +109,11 @@ body {
 
 .docs section:last-child {
 	padding-bottom: var(--space-120);
+}
+
+/* The opening line is a title block, so it keeps its distance from the bar and from what follows. */
+.docs section:first-child {
+	padding: var(--space-60) 0 var(--space-120);
 }
 
 .docs h2 {

@@ -23,15 +23,9 @@ function Page() {
 				</section>
 
 				<section>
-					<h2>Install</h2>
+					<h2>Getting started</h2>
 					<div className="body">
 						<Code lang="tsx">{`npm install react-blender-panels`}</Code>
-					</div>
-				</section>
-
-				<section>
-					<h2>Here's how it works</h2>
-					<div className="body">
 						<p>You own the panels. Pass in an array and save the new one it hands back after every drag.</p>
 						<Code lang="tsx">{`import { Panels } from 'react-blender-panels'
 import type { Panel } from 'react-blender-panels'
